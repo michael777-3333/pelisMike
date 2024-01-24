@@ -1,0 +1,50 @@
+.fondoSingIn{
+    background-image: url(/src/assets/img/fondo/fondoIndex.png); 
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ContenedorSingIn{
+    background-color: rgba(0, 0, 0, 0.425);
+    width: 700px;
+    height: 550px;
+    border-radius: 10px;
+    /* justify-content: center;
+    align-items: center; */
+   
+}
+/* .inputSingIn{
+    background-color: #fff;
+    font-family: "Jolly Lodger", system-ui;
+    font-weight: 100;
+    font-style: normal;
+    width: 500px;
+    border-radius: 10px;
+} */
+.buttonSingIn{
+    background-color: #fff;
+    font-family: "Jolly Lodger", system-ui;
+    font-weight: 100;
+    font-style: normal;
+    width: 100px;
+    height: 50px;
+}
+
+.GoogleButton{
+    padding-top: 30px;
+    width: 250px;
+    height: 50px;
+    background-color: #fff;
+}
+
+.contenedorGoogle{
+    margin-top: 100px;
+}
+
+.contenerdoInput{
+    margin: 10px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
