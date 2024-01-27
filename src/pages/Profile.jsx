@@ -3,14 +3,39 @@ import { FormControl } from "@mui/material";
 import { Container, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import {useUser} from '../context/userContext'
+import { useNavigate, useParams } from "react-router-dom"; //obtener un obejero con los datos que va en la URL (useParams)
 function Profile(params) {
-  const { register, handleSubmit } = useForm();
-  const {user}=useAuth()
-  const onSubmit = handleSubmit(async (values) => {
-    signup(values);
-  });
+
+
+  const { register, handleSubmit, setValue } = useForm();
+  const {user,singin}=useAuth()
+
+  const {getUser,updateUser,name,getUsername}=useUser()
+  const paramsHeader = useParams()
+ 
+
+  useEffect(()=>{
+  async function loadUser() {
+    if (paramsHeader.id) {
+     const getUsername = await getUser(paramsHeader.id)
+     setValue('username',getUsername['username'] )
+   }
+    }
+    loadUser()
+  },[])
+
+  const onSubmit = handleSubmit((data)=>{
+      updateUser(paramsHeader.id,data)
+
+      getUser(paramsHeader.id)
+      
+      // setName(data['username'])
+  })
+
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -26,7 +51,7 @@ function Profile(params) {
           }}
         >
           <div>
-            <h1 style={{ fontSize: "50px", color:'white' }}>{user['username']}</h1>
+            <h1 style={{ fontSize: "50px", color:'white' }}>{name}</h1>
           </div>
           <div>
             <img
@@ -51,13 +76,13 @@ function Profile(params) {
                   className="inputSingIn"
                   type="text"
                   id="outlined-basic"
-                  label="Username"
+                  // label="Username"
                   variant="outlined"
                   {...register("username", { required: true })}
                 />
               </FormControl>
               <div style={{justifyContent:'center', display:'flex', marginTop:'40px'}}>
-                <Button
+                <Button 
                   style={{
                     backgroundColor: "white",
                     fontFamily: ' "Jolly Lodger", system-ui',

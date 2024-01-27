@@ -18,14 +18,12 @@ export const AuthProvaider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [movies, setMovies]=useState([])
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
       console.log(res);
       setUser(res.data);
       setisAuthenticate(true);
-      getMovies()
     } catch (error) {
       console.log(error.response);
       setErrors(error.response.data);
@@ -38,7 +36,6 @@ export const AuthProvaider = ({ children }) => {
       console.log(res);
       setisAuthenticate(true);
       setUser(res.data);
-      getMovies()
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
@@ -55,8 +52,7 @@ export const AuthProvaider = ({ children }) => {
   }
 
   
-      
-  
+
 
   useEffect(() => {
     async function checkLogin() {
@@ -69,15 +65,16 @@ export const AuthProvaider = ({ children }) => {
       }
       try {
         const res = await veryfyTokenRequest(cookies.token);
-        const resMovie = await getMoviesRequest(movies)
-      // console.log(res['data']);
-        setMovies(resMovie['data'])
+        // const resMovie = await getMoviesRequest(movies)
+        // console.log(resMovie);
+      console.log(res);
+        // setMovies(resMovie['data'])
         if (!res.data) {
           setisAuthenticate(false);
           setLoading(false);
           return;
         }
-        console.log('dd');
+        console.log(res.data);
         setisAuthenticate(true);
         setUser(res.data);
         
@@ -103,7 +100,7 @@ export const AuthProvaider = ({ children }) => {
         singin,
         loading,
         logout,
-        movies
+        // movies
       }}
     >
       {children}

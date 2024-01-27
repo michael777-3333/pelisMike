@@ -11,6 +11,9 @@ import Register from "../pages/Register";
 import Movies from "../pages/movies";
 import Profile from "../pages/profile";
 import { useAuth } from "../context/AuthContext.jsx";
+import Action from "../pages/accion.jsx";
+import Fantasia from "../pages/fantasia.jsx";
+import Terror from "../pages/terror.jsx";
 
 const Routes = createBrowserRouter([
   {
@@ -38,12 +41,12 @@ const Routes = createBrowserRouter([
         element:<Start/>
       },
       {
-        path: "/Start/Drama",
+        path: "/Start/Drama/:id",
         element: <Drama />,
         // element: <Start />,
       },
       {
-        path: "/Start/Comedia",
+        path: "/Start/Comedia/:id",
         element: <Comedia/>,
       },
       {
@@ -51,9 +54,22 @@ const Routes = createBrowserRouter([
         element: <Movies/>,
       },
       {
-        path: "/Start/Profile",
+        path: "/Start/Action/:id",
+        element: <Action/>,
+      },
+      {
+        path: "/Start/Fantasia/:id",
+        element: <Fantasia/>,
+      },
+      {
+        path: "/Start/Terror/:id",
+        element: <Terror/>,
+      },
+      {
+        path: "/Start/Profile/:id",
         element: <Profile/>,
       },
+      
     ],
   },
 ]);

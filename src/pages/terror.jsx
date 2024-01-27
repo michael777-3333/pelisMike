@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 
 import { useForm } from "react-hook-form";
 
-function Comedia() {
+function Terror() {
   const { moviesByGenres, genresMovies } = useMovies();
   const params = useParams();
   const { register, handleSubmit, setValue } = useForm();
@@ -40,7 +40,7 @@ function Comedia() {
     >
       <Grid item xs={12}>
         <Item>
-          <h1 style={{ color: "white", fontSize: "50px" }}>Comedia</h1>
+          <h1 style={{ color: "white", fontSize: "50px" }}>Terror</h1>
         </Item>
 
         <form>
@@ -77,4 +77,4 @@ function Comedia() {
   );
 }
 
-export default Comedia;
+export default Terror;

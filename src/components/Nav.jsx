@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -6,24 +7,58 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
-import { items, logout2 } from "./Menu";
+import { items, logout2, profileRoute } from "./Menu";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import IconButton from "@mui/material/IconButton";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../context/AuthContext";
+import { useUser } from "../context/userContext";
+import { useMovies } from "../context/moviesContext";
+import { useNavigate, useParams } from "react-router-dom"; //obtener un obejero con los datos que va en la URL (useParams)
+import { get } from "react-hook-form";
+
 function Nav() {
-  const {logout} = useAuth();
+  //  const [name,setName] = useState()
+  const { logout, user } = useAuth();
+  const { name,updateUser,getUser } = useUser();
+  const { movies,allMovies } = useMovies([]);
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-  const {user}=useAuth()
+  const paramsHeader = useParams()
+  console.log(user['username']);
+
+  console.log(name);
+  useEffect(()=>{
+    console.log(paramsHeader.id);
+    getUser(paramsHeader.id)
+  },[name])
+
+
+  console.log(movies);
+
+  let action = movies.data[0].genres["_id"];
+  let comedy = movies.data[11].genres["_id"];
+  let romance = movies.data[27].genres["_id"];
+  let fantsy = movies.data[22].genres["_id"];
+  let terror = movies.data[40].genres["_id"];
+  
+  // let action 
+  //   let comedy 
+
+  // let romance 
+
+  // let fantsy 
+  //   let terror 
+
+  function sendIdRenger() {
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -79,8 +114,114 @@ function Nav() {
           </ListItem>
         ))}
 
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              onClick={sendIdRenger}
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/Start/Drama/${romance}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Romance"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+
+        
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              onClick={sendIdRenger}
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/Start/Action/${action}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Accion"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              onClick={sendIdRenger}
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/Start/Comedia/${comedy}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Comedia"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              onClick={sendIdRenger}
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/Start/Fantasia/${fantsy}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Fantasia"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              onClick={sendIdRenger}
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/Start/Terror/${terror}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Terror"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding style={{backgroundColor:'black'}}>
+          <ListItemButton>
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to={`/start/profile/${user.id}`}
+            >
+              <ListItemText
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  marginLeft: "50px",
+                }}
+                primary={"Perfil"}
+              />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+
         {logout2.map((item) => (
-          <ListItem key={item.id} disablePadding>
+          <ListItem key={item.id} disablePadding style={{backgroundColor:'black'}}>
             <ListItemButton
               onClick={() => {
                 logout();
@@ -107,8 +248,15 @@ function Nav() {
   );
 
   return (
-    <Box  sx={{ flexGrow: 1}}>
-      <AppBar style={{ backgroundColor: "black", position:'fixed',zIndex:'999', height:'60px' }} >
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        style={{
+          backgroundColor: "black",
+          position: "fixed",
+          zIndex: "999",
+          height: "60px",
+        }}
+      >
         <Toolbar>
           {["left"].map((anchor) => (
             <React.Fragment key={anchor}>
@@ -128,12 +276,29 @@ function Nav() {
               </Drawer>
             </React.Fragment>
           ))}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily:'"Jolly Lodger", system-ui', fontSize:'30px' }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              fontFamily: '"Jolly Lodger", system-ui',
+              fontSize: "30px",
+            }}
+          >
             PelisMike
           </Typography>
-          <Button style={{height:'60px'}} color="inherit">
-           
-            <div style={{}}> <h6 style={{fontFamily:'"Jolly Lodger", system-ui', fontSize:'25px'}}>Welcome: {user['username']}</h6></div>
+          <Button style={{ height: "60px" }} color="inherit">
+            <div style={{}}>
+              {" "}
+              <h6
+                style={{
+                  fontFamily: '"Jolly Lodger", system-ui',
+                  fontSize: "25px",
+                }}
+              >
+                Welcome: {name}
+              </h6>
+            </div>
           </Button>
         </Toolbar>
       </AppBar>

@@ -40,7 +40,7 @@ function Comedia() {
     >
       <Grid item xs={12}>
         <Item>
-          <h1 style={{ color: "white", fontSize: "50px" }}>Comedia</h1>
+          <h1 style={{ color: "white", fontSize: "50px" }}>Acción</h1>
         </Item>
 
         <form>
@@ -55,8 +55,8 @@ function Comedia() {
               className="inputSingIn"
               type="text"
               id="outlined-basic"
+              label="Username"
               placeholder="Busca la peli"
-              variant="outlined"
               value={charge}
               // {...register("username", { required: true })}
             />

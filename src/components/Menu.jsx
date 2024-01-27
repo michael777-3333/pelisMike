@@ -1,4 +1,4 @@
-import Comedia from "../pages/Comedia"
+
 
 export const items=[
     {
@@ -11,23 +11,16 @@ export const items=[
         text:'Start',
         route :'/Start'
     },
-    {
-        id:'2',
-        text:'Comedia',
-        route:'/Start/comedia'
-    },
-    {
-        id:'4',
-        text:'Drama',
-        route:'/Start/Drama'
-    },{
-        id:'6',
-        text:'Perfil',
-        route:'/Start/Profile/:id'
-    },
-  
-    
-  
+    // {
+    //     id:'2',
+    //     text:'Comedia',
+    //     route:'/Start/comedia/:id'
+    // },
+    // {
+    //     id:'4',
+    //     text:'Drama',
+    //     route:'/Start/Drama'
+    // }
 ]
 
 export const logout2=[
@@ -40,4 +33,11 @@ export const logout2=[
     },
 ]
 
+export const profileRoute=[
+    ,{
+        id:'6',
+        text:'Perfil',
+        route:'/Start/Profile/:id'
+    },
+]
 

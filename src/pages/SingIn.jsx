@@ -9,20 +9,30 @@ import GoogleIcon from "@mui/icons-material/Google";
 import "/public/styles/singIn.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useMovies } from "../context/moviesContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SingIn() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
   const { singin, errors, isAuthenticate } = useAuth();
+  // const {allMovies} =useMovies()
   const navigate = useNavigate();
-
+  const {movies,allMovies } = useMovies();
   const onSubmit = handleSubmit((values) => {
     singin(values);
+    console.log('sssss');
+    // console.log(allMovies());
+
   });
+
+  function moviesGo() {
+    allMovies()
+  }
 
   useEffect(() => {
     if (isAuthenticate) navigate("/start");
+    // allMovies()
   }, [isAuthenticate]);
 
   return (
@@ -96,7 +106,7 @@ function SingIn() {
                 alignItems: "center",
               }}
             >
-              <Button
+              <Button onClick={moviesGo}
                 style={{
                   backgroundColor: "white",
                   fontFamily: ' "Jolly Lodger", system-ui',
