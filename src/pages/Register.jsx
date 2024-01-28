@@ -20,7 +20,9 @@ function Register() {
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
   });
-
+  function moviesGo() {
+    allMovies()
+  }
 
   return (
     <Grid container className="fondoSingIn" spacing={1}>
@@ -103,7 +105,7 @@ function Register() {
                 alignItems: "center",
               }}
             >
-              <Button
+              <Button onClick={moviesGo}
                 style={{
                   backgroundColor: "white",
                   fontFamily: ' "Jolly Lodger", system-ui',

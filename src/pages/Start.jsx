@@ -22,6 +22,11 @@ function Start() {
   console.log(movies);
 
 
+  useEffect(()=>{
+    console.log(movies);
+  },[])
+
+
 
 
   // const limit1 = movies.slice(0,10)
@@ -68,9 +73,10 @@ function Start() {
       <div style={{ height: "40px" }}></div>
       <Grid item xs={12} marginTop={6}>
         <Carousel partialVisible={true} responsive={responsive}>
-          {movies &&
-            movies.data &&
-            movies.data.slice(0,10).map((pelis) => (
+
+       
+
+          {movies && movies.slice(0,10).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} goMovie={seeMovie} />
             ))}
         </Carousel>
@@ -79,8 +85,8 @@ function Start() {
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
           {movies &&
-            movies.data &&
-            movies.data.slice(11,20).map((pelis) => (
+            movies&&
+            movies.slice(11,20).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>
@@ -88,16 +94,16 @@ function Start() {
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
           {movies &&
-            movies.data &&
-            movies.data.slice(21,31).map((pelis) => (
+            movies&&
+            movies.slice(21,31).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>
         <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
           {movies &&
-            movies.data &&
-            movies.data.slice(31,40).map((pelis) => (
+            movies &&
+            movies.slice(31,40).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>
@@ -105,8 +111,8 @@ function Start() {
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
           {movies &&
-            movies.data &&
-            movies.data.slice(41,47).map((pelis) => (
+            movies &&
+            movies.slice(41,47).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>

@@ -23,42 +23,49 @@ import { get } from "react-hook-form";
 function Nav() {
   //  const [name,setName] = useState()
   const { logout, user } = useAuth();
-  const { name,updateUser,getUser } = useUser();
-  const { movies,allMovies } = useMovies([]);
+  const { name, updateUser, getUser } = useUser();
+  const { movies, allMovies } = useMovies([]);
+  // const [action, setAction] = useState()
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-  const paramsHeader = useParams()
-  console.log(user['username']);
+  const paramsHeader = useParams();
+  console.log(user["username"]);
 
-  console.log(name);
-  useEffect(()=>{
-    console.log(paramsHeader.id);
-    getUser(paramsHeader.id)
-  },[name])
+  // console.log(name);
 
-
+  let action;
+  let comedy;
+  let romance;
+  let fantsy;
+  let terror;
+    useEffect(()=>{
+      console.log('sss');
+      console.log(paramsHeader.id);
+      getUser(paramsHeader.id)
+  
+    },[])
   console.log(movies);
 
-  let action = movies.data[0].genres["_id"];
-  let comedy = movies.data[11].genres["_id"];
-  let romance = movies.data[27].genres["_id"];
-  let fantsy = movies.data[22].genres["_id"];
-  let terror = movies.data[40].genres["_id"];
-  
-  // let action 
-  //   let comedy 
+  // console.log(movies);
 
-  // let romance 
+  // if (movies ==[]) {
+  //   return action
+  // }else{
+  //   // return
+  //   console.log(action);
+  // }
 
-  // let fantsy 
-  //   let terror 
+  // action = ;
+  // comedy = movies[11].genres["_id"];
+  // romance = movies[27].genres["_id"];
+  // fantsy = movies[22].genres["_id"];
+  // terror = movies[40].genres["_id"];
 
-  function sendIdRenger() {
-  }
+  function sendIdRenger() {}
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -114,12 +121,12 @@ function Nav() {
           </ListItem>
         ))}
 
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               onClick={sendIdRenger}
               style={{ textDecoration: "none", color: "white" }}
-              to={`/Start/Drama/${romance}`}
+              to={movies && movies.length > 0 ? `/Start/Drama/${movies[27].genres["_id"]}` : "#"}
             >
               <ListItemText
                 style={{
@@ -132,14 +139,13 @@ function Nav() {
           </ListItemButton>
         </ListItem>
 
-        
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               onClick={sendIdRenger}
               style={{ textDecoration: "none", color: "white" }}
-              to={`/Start/Action/${action}`}
-            >
+              to={movies && movies.length > 0 ? `/Start/Action/${movies[0].genres["_id"]}` : "#"}
+              >
               <ListItemText
                 style={{
                   fontFamily: '"Jolly Lodger", system-ui',
@@ -150,12 +156,12 @@ function Nav() {
             </Link>
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               onClick={sendIdRenger}
               style={{ textDecoration: "none", color: "white" }}
-              to={`/Start/Comedia/${comedy}`}
+              to={movies && movies.length > 0 ? `/Start/Comedia/${movies[11].genres["_id"]}` : "#"}
             >
               <ListItemText
                 style={{
@@ -167,12 +173,12 @@ function Nav() {
             </Link>
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               onClick={sendIdRenger}
               style={{ textDecoration: "none", color: "white" }}
-              to={`/Start/Fantasia/${fantsy}`}
+              to={movies && movies.length > 0 ? `/Start/Fantasia/${movies[22].genres["_id"]}` : "#"}
             >
               <ListItemText
                 style={{
@@ -185,12 +191,12 @@ function Nav() {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               onClick={sendIdRenger}
               style={{ textDecoration: "none", color: "white" }}
-              to={`/Start/Terror/${terror}`}
+              to={movies && movies.length > 0 ? `/Start/Terror/${movies[40].genres["_id"]}` : "#"}
             >
               <ListItemText
                 style={{
@@ -203,7 +209,7 @@ function Nav() {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding style={{backgroundColor:'black'}}>
+        <ListItem disablePadding style={{ backgroundColor: "black" }}>
           <ListItemButton>
             <Link
               style={{ textDecoration: "none", color: "white" }}
@@ -221,7 +227,11 @@ function Nav() {
         </ListItem>
 
         {logout2.map((item) => (
-          <ListItem key={item.id} disablePadding style={{backgroundColor:'black'}}>
+          <ListItem
+            key={item.id}
+            disablePadding
+            style={{ backgroundColor: "black" }}
+          >
             <ListItemButton
               onClick={() => {
                 logout();

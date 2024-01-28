@@ -18,12 +18,13 @@ export const useMovies = () => {
 export const MoviesProvaider = ({ children }) => {
     const [movies,setMovies]= useState([])
     const [moviesByGenres, setMoviesByGenres]= useState([])
+    const [comedy, setComedy] = useState()
 
   const allMovies = async () => {
     try {
       const resMovie = await getMoviesRequest();
       console.log(resMovie);
-      setMovies(resMovie)
+      setMovies(resMovie.data)
       console.log(movies);
     } catch (error) {
       console.log(error);
@@ -40,11 +41,21 @@ export const MoviesProvaider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    console.log(movies);
-    allMovies();
-    console.log("sss");
-  }, []);
+  useEffect(()=>{
+    console.log('sss');
+    async function checMovies(){
+      try {
+              const resMovie = await getMoviesRequest();
+              setMovies(resMovie.data)
+              console.log(resMovie.data);
+              // setComedy()
+              // console.log(resMovie[11].genres["_id"]);
+            } catch (error) {
+              console.log(error);
+            }
+    }
+    checMovies()
+  },[])
 
   // useEffect(() => {
   //     const checkMovies = async ()=> {

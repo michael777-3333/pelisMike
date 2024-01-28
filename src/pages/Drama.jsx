@@ -20,7 +20,7 @@ function Comedia() {
   }, [params.id]);
   const handleChange = (event) => {
     setCharge(event.target.value);
-    console.log("ll");
+  
   };
 
   const Item = styled(Paper)(({ theme }) => ({
