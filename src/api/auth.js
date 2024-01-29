@@ -9,6 +9,7 @@ export const loginRequest = (user)=> axios.post(`/login`,user)
 
 export const veryfyTokenRequest=()=> axios.get('/verify',veryfyTokenRequest)
 
+export const googleRequest=()=> axios.post(`/auth/google`)
 
-
+export const veryfyGoogleToken=()=> axios.get(`verifyGoogle`,veryfyGoogleToken)
 

@@ -1,6 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { registerRequest, loginRequest, veryfyTokenRequest } from "../api/auth";
-import {getMoviesRequest} from '../api/movies'
+import {
+  registerRequest,
+  loginRequest,
+  veryfyTokenRequest,
+  googleRequest,
+  veryfyGoogleToken,
+} from "../api/auth";
+import { getMoviesRequest } from "../api/movies";
 import { set } from "react-hook-form";
 import Cookie from "js-cookie";
 export const AuthContext = createContext();
@@ -21,11 +27,9 @@ export const AuthProvaider = ({ children }) => {
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
-      console.log(res);
       setUser(res.data);
       setisAuthenticate(true);
     } catch (error) {
-      console.log(error.response);
       setErrors(error.response.data);
     }
   };
@@ -33,9 +37,8 @@ export const AuthProvaider = ({ children }) => {
   const singin = async (user) => {
     try {
       const res = await loginRequest(user);
-      console.log(res);
       setisAuthenticate(true);
-      setUser(res.data);
+      setUser(res.data)
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
@@ -45,48 +48,83 @@ export const AuthProvaider = ({ children }) => {
     }
   };
 
-  const logout = (user)=>{
+  const singinGoogle = async () => {
+    try {
+      const res = await googleRequest();
+
+      window.location.href = res.data["url"];
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const logout = (user) => {
     Cookie.remove("token");
-    setisAuthenticate(false)
-    setUser(null)
-  }
-
-  
-
+    Cookie.remove('googleToken')
+    setisAuthenticate(false);
+    setUser(null);
+  };
 
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookie.get();
-      if (!cookies.token) {
-        setisAuthenticate(false);
-        setLoading(false);
-        return setUser(null);
 
-      }
-      try {
-        const res = await veryfyTokenRequest(cookies.token);
-        // const resMovie = await getMoviesRequest(movies)
-        // console.log(resMovie);
-      console.log(res);
-        // setMovies(resMovie['data'])
-        if (!res.data) {
+      if (cookies.googleToken) {
+        if (!cookies.googleToken) {
           setisAuthenticate(false);
           setLoading(false);
-          return;
+          return setUser(null);
         }
-        console.log(res.data);
-        setisAuthenticate(true);
-        setUser(res.data);
-        
-        setLoading(false);
-      } catch (error) {
-       
-        console.log(error);
-        setisAuthenticate(false);
-        setUser(null);
-        setLoading(false);
+        try {
+
+          const res = await veryfyGoogleToken(cookies.googleToken);
+
+          if (!res.data) {
+            setisAuthenticate(false);
+            setLoading(false);
+            return;
+          }
+          setisAuthenticate(true);
+          setUser(res.data);
+          setLoading(false);
+        } catch (error) {
+
+          setisAuthenticate(false);
+          setUser(null);
+          setLoading(false);
+        }
+      } else {
+        if (!cookies.token) {
+
+          setisAuthenticate(false);
+          setLoading(false);
+          return setUser(null);
+        }
+        try {
+
+          const res = await veryfyTokenRequest(cookies.token);
+
+
+          if (!res.data) {
+            setisAuthenticate(false);
+            setLoading(false);
+            return;
+          }
+          console.log(res.data);
+          setisAuthenticate(true);
+          setUser(res.data);
+
+          setLoading(false);
+        } catch (error) {
+
+          setisAuthenticate(false);
+          setUser(null);
+          setLoading(false);
+        }
       }
     }
+
     checkLogin();
   }, []);
 
@@ -100,6 +138,7 @@ export const AuthProvaider = ({ children }) => {
         singin,
         loading,
         logout,
+        singinGoogle,
         // movies
       }}
     >

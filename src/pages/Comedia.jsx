@@ -13,14 +13,14 @@ function Comedia() {
   const params = useParams();
   const { register, handleSubmit, setValue } = useForm();
   const [charge, setCharge] = useState("");
-  console.log(charge);
+
 
   useEffect(() => {
     genresMovies(params.id);
   }, [params.id]);
   const handleChange = (event) => {
     setCharge(event.target.value);
-    console.log("ll");
+
   };
 
   const Item = styled(Paper)(({ theme }) => ({

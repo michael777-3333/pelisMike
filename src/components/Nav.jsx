@@ -33,9 +33,7 @@ function Nav() {
     right: false,
   });
   const paramsHeader = useParams();
-  console.log(user["username"]);
 
-  // console.log(name);
 
   let action;
   let comedy;
@@ -43,27 +41,10 @@ function Nav() {
   let fantsy;
   let terror;
     useEffect(()=>{
-      console.log('sss');
-      console.log(paramsHeader.id);
       getUser(paramsHeader.id)
-  
     },[])
-  console.log(movies);
 
-  // console.log(movies);
 
-  // if (movies ==[]) {
-  //   return action
-  // }else{
-  //   // return
-  //   console.log(action);
-  // }
-
-  // action = ;
-  // comedy = movies[11].genres["_id"];
-  // romance = movies[27].genres["_id"];
-  // fantsy = movies[22].genres["_id"];
-  // terror = movies[40].genres["_id"];
 
   function sendIdRenger() {}
 

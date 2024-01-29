@@ -19,9 +19,9 @@ export const UserProvaider = ({ children }) => {
 
   const getUser = async (id) => {
     try {
-      console.log(id);
+     
       const res = await getUserRequest(id);
-     console.log(res.data['username']);
+    
       setName(res.data['username']);
       return res.data;
     } catch (error) {

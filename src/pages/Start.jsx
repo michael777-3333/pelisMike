@@ -19,13 +19,10 @@ function Start() {
   const navigate = useNavigate();
   const { movies, allMovies } = useMovies();
 
-  console.log(movies);
 
 
-  useEffect(()=>{
-    console.log(movies);
-  },[])
 
+ 
 
 
 
@@ -33,7 +30,7 @@ function Start() {
   // const limit2 = movies.slice(10,20)
   // const limit3= movies.slice(20,31)
 
-  console.log(movies);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },

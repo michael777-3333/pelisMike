@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 function SingIn() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
-  const { singin, errors, isAuthenticate } = useAuth();
+  const { singin, errors, isAuthenticate,singinGoogle } = useAuth();
   // const {allMovies} =useMovies()
   const navigate = useNavigate();
   const {movies,allMovies } = useMovies();
@@ -28,6 +28,10 @@ function SingIn() {
 
   function moviesGo() {
     allMovies()
+  }
+  function google(params) {
+    singinGoogle()
+    // allMovies()
   }
 
   useEffect(() => {
@@ -122,6 +126,7 @@ function SingIn() {
             <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px', marginTop:'250px' }}><p>No tengo cuenta: <Link to='/register'>Register </Link></p></div>
           </div>
         </form>
+        <button onClick={google}></button>
       </Grid>
     </Grid>
   );

@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function NotFoundPage(params) {
-    return(
-        <div>404 Page was not found</div>
-    )
+  return (
+    <div>
+      <h1 style={{ color:'white', fontSize: "40px" }}>Page was not found</h1>
+    </div>
+  );
 }
-export default NotFoundPage
+export default NotFoundPage;

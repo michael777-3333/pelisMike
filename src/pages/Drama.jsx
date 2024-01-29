@@ -13,7 +13,6 @@ function Comedia() {
   const params = useParams();
   const { register, handleSubmit, setValue } = useForm();
   const [charge, setCharge] = useState("");
-  console.log(charge);
 
   useEffect(() => {
     genresMovies(params.id);
