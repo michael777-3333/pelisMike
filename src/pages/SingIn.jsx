@@ -46,7 +46,7 @@ function SingIn() {
           <h1 className="letrasHome">Pelis Mike</h1>
         </div>
       </Grid>
-      <Grid container justifyContent="center" item xs={12}>
+      <Grid  justifyContent="center" item xs={12}>
         {errors.map((error, i) => (
           <div key={i} style={{ color: "white", backgroundColor: "red" }}>
             {error}
@@ -122,11 +122,33 @@ function SingIn() {
                 LOG IN
               </Button>
             </div>
+            
 
             <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px', marginTop:'250px' }}><p>No tengo cuenta: <Link to='/register'>Register </Link></p></div>
           </div>
         </form>
-        <button onClick={google}></button>
+        <div
+              style={{
+                margin: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button onClick={google}
+                style={{
+                  backgroundColor: "white",
+                  fontFamily: ' "Jolly Lodger", system-ui',
+                  color: "black",
+                }}
+                className="buttonSingIn"
+                type="submit"
+              >
+                Google
+              </Button>
+            </div>
+            
+        
       </Grid>
     </Grid>
   );

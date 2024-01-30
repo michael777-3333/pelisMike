@@ -9,8 +9,8 @@ import SingIn from "../pages/SingIn";
 import Register from "../pages/Register";
 
 import Movies from "../pages/movies";
-import Profile from "../pages/profile";
-import { useAuth } from "../context/AuthContext.jsx";
+import Profile from "../pages/Profile.jsx";
+
 import Action from "../pages/accion.jsx";
 import Fantasia from "../pages/fantasia.jsx";
 import Terror from "../pages/terror.jsx";
