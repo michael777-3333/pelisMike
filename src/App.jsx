@@ -12,7 +12,7 @@ function App() {
     <AuthProvaider>
       <UserProvaider>
         <MoviesProvaider>
-        <RouterProvider router={Routes}></RouterProvider>
+        <RouterProvider basename='https://pelis-mike.vercel.app/' router={Routes}></RouterProvider>
         </MoviesProvaider>
       
       </UserProvaider>
