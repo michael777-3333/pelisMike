@@ -9,6 +9,7 @@ import {
 import { getMoviesRequest } from "../api/movies";
 import { set } from "react-hook-form";
 import Cookie from "js-cookie";
+import CookiesUnivers from 'universal-cookie';
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -39,6 +40,12 @@ export const AuthProvaider = ({ children }) => {
       const res = await loginRequest(user);
       setisAuthenticate(true);
       setUser(res.data)
+      console.log(res);
+      console.log(res.token);
+      
+      const cookies= new CookiesUnivers()
+      cookies.set('token',res.data.token,{path:'/', secure:true, sameSite:'strict'}) 
+
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
