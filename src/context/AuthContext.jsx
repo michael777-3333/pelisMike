@@ -69,7 +69,7 @@ export const AuthProvaider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookie.get();
-
+          console.log(cookies,'dd');
       if (cookies.googleToken) {
         if (!cookies.googleToken) {
           setisAuthenticate(false);
@@ -96,17 +96,17 @@ export const AuthProvaider = ({ children }) => {
         }
       } else {
         if (!cookies.token) {
-
+          console.log(cookies.token);
+            console.log('s');
           setisAuthenticate(false);
           setLoading(false);
           return setUser(null);
         }
         try {
-
+          console.log('opop');
           const res = await veryfyTokenRequest(cookies.token);
-
-
           if (!res.data) {
+            console.log('kkjj');
             setisAuthenticate(false);
             setLoading(false);
             return;

@@ -9,10 +9,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMovies } from "../context/moviesContext";
+
 
 function Register() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
   const { signup, isAuthenticate, errors } = useAuth();
+  const {movies,allMovies } = useMovies();
+
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticate) navigate("/start");
