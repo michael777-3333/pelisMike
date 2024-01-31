@@ -7,8 +7,8 @@ function Layout() {
   const {loading,isAuthenticate}=useAuth()
   // console.log(loading, isAuthenticate);
   // console.log(useAuth());
-  if (loading && loading) return <h1>loading...</h1>
-  if (!loading && !loading && !isAuthenticate && !isAuthenticate) return <Navigate to="/SingIn" replace/>
+  if (loading !== undefined && loading) return <h1>loading...</h1>
+  if (!loading !==undefined && !loading && !isAuthenticate!==undefined && !isAuthenticate) return <Navigate to="/SingIn" replace/>
 
   return(
     <main style={{backgroundColor:'black',padding:'0px'}}>
