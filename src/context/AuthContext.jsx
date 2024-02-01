@@ -125,6 +125,7 @@ export const AuthProvaider = ({ children }) => {
 
           setLoading(false);
         } catch (error) {
+          console.log(error);
           setisAuthenticate(false);
           setUser(null);
           setLoading(false);
