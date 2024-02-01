@@ -11,7 +11,7 @@ function Layout() {
   if (loading ) return <h1 style={{color:'white', fontSize:'40px'}}>loading...</h1>
 
 
-  if (isAuthenticate==false) return <Navigate to="/SingIn" replace/>
+  // if (isAuthenticate==false) return <Navigate to="/SingIn" replace/>
 
   return(
     <main style={{backgroundColor:'black',padding:'0px'}}>
