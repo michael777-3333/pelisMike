@@ -47,7 +47,8 @@ export const AuthProvaider = ({ children }) => {
       cookies.set("token", res.data.token, {
         path: "/",
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
+        expires:3600000,
       });
       // console.log(cookies.get("token"));
     } catch (error) {
