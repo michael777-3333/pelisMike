@@ -2,7 +2,6 @@ import * as React from 'react';
 import Nav from './Nav';
 import {Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-// import { Container, CssBaseline } from "@mui/material";
 
 function Layout() {
   const {loading,isAuthenticate}=useAuth()
@@ -12,11 +11,10 @@ function Layout() {
   if (loading ) return <h1 style={{color:'white', fontSize:'40px'}}>loading...</h1>
 
 
-  if (isAuthenticate==false) return <Navigate to="/SingIn" replace/>
+  if (!loading && !isAuthenticate) return <Navigate to="/SingIn" replace/>
 
   return(
     <main style={{backgroundColor:'black',padding:'0px'}}>
-      {/* <CssBaseline/> */}
       <Nav></Nav>
       <Outlet/>
     </main>
