@@ -107,6 +107,7 @@ export const AuthProvaider = ({ children }) => {
       
       // else {
         if (!cookies.token) {
+          console.log(cookies.token, 'jwjw');
           console.log(cookies.token,'token undefined');
        
           setisAuthenticate(false);
@@ -115,7 +116,7 @@ export const AuthProvaider = ({ children }) => {
           return setUser(null);
         }
         try {
-          console.log(cookies);
+          console.log(cookies,'bxbx');
           const res = await veryfyTokenRequest(cookies.token);
           console.log(res);
           if (!res.data) {
