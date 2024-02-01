@@ -48,7 +48,7 @@ export const AuthProvaider = ({ children }) => {
         path: "/",
         secure: true,
         sameSite: "strict",
-        domain:'main--leafy-haupia-13a5b2.netlify.app'
+        domain:'pelismike.onrender.com'
         // expires:3600000,
       });
       // console.log(cookies.get("token"));
