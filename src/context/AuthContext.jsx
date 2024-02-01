@@ -103,20 +103,24 @@ export const AuthProvaider = ({ children }) => {
       //     setUser(null);
       //     setLoading(false);
       //   }
-      // } 
-      
-      // else {
-        if (!cookies.token) {
-          console.log(cookies.token, 'jwjw');
-          console.log(cookies.token,'token undefined');
-       
-          setisAuthenticate(false);
+      // }
 
-          setLoading(false);
-          return setUser(null);
-        }
-        try {
-          console.log(cookies,'bxbx');
+      // else {
+      // if (!cookies.token) {
+      //   console.log(cookies.token, 'jwjw');
+      //   console.log(cookies.token,'token undefined');
+
+      //   setisAuthenticate(false);
+
+      //   setLoading(false);
+      //   return setUser(null);
+      // }
+
+      try {
+        console.log(cookies, "bxbx");
+
+        // Verifica si cookies.token tiene un valor antes de hacer la solicitud
+        if (cookies.token) {
           const res = await veryfyTokenRequest(cookies.token);
           console.log(res);
           if (!res.data) {
@@ -128,14 +132,17 @@ export const AuthProvaider = ({ children }) => {
           console.log(res.data);
           setisAuthenticate(true);
           setUser(res.data);
-
           setLoading(false);
-        } catch (error) {
-          console.log(error);
+        } else {
+          // Si cookies.token no tiene un valor, establece la autenticación como falsa y detiene la carga
           setisAuthenticate(false);
-          setUser(null);
           setLoading(false);
-        // }
+        }
+      } catch (error) {
+        console.log(error);
+        setisAuthenticate(false);
+        setUser(null);
+        setLoading(false);
       }
     }
 
