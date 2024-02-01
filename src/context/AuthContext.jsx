@@ -80,30 +80,32 @@ export const AuthProvaider = ({ children }) => {
     async function checkLogin() {
       const cookies = Cookie.get();
       console.log(cookies, "dd");
-      if (cookies.googleToken) {
-        console.log('ksks');
-        if (!cookies.googleToken) {
-          setisAuthenticate(false);
-          setLoading(false);
-          return setUser(null);
-        }
-        try {
-          const res = await veryfyGoogleToken(cookies.googleToken);
+      // if (cookies.googleToken) {
+      //   console.log('ksks');
+      //   if (!cookies.googleToken) {
+      //     setisAuthenticate(false);
+      //     setLoading(false);
+      //     return setUser(null);
+      //   }
+      //   try {
+      //     const res = await veryfyGoogleToken(cookies.googleToken);
 
-          if (!res.data) {
-            setisAuthenticate(false);
-            setLoading(false);
-            return;
-          }
-          setisAuthenticate(true);
-          setUser(res.data);
-          setLoading(false);
-        } catch (error) {
-          setisAuthenticate(false);
-          setUser(null);
-          setLoading(false);
-        }
-      } else {
+      //     if (!res.data) {
+      //       setisAuthenticate(false);
+      //       setLoading(false);
+      //       return;
+      //     }
+      //     setisAuthenticate(true);
+      //     setUser(res.data);
+      //     setLoading(false);
+      //   } catch (error) {
+      //     setisAuthenticate(false);
+      //     setUser(null);
+      //     setLoading(false);
+      //   }
+      // } 
+      
+      // else {
         if (!cookies.token) {
           console.log(cookies.token,'token undefined');
        
@@ -132,7 +134,7 @@ export const AuthProvaider = ({ children }) => {
           setisAuthenticate(false);
           setUser(null);
           setLoading(false);
-        }
+        // }
       }
     }
 
