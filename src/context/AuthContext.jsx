@@ -9,7 +9,7 @@ import {
 import { getMoviesRequest } from "../api/movies";
 import { set } from "react-hook-form";
 import Cookie from "js-cookie";
-import CookiesUnivers from 'universal-cookie';
+import CookiesUnivers from "universal-cookie";
 export const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -39,13 +39,16 @@ export const AuthProvaider = ({ children }) => {
     try {
       const res = await loginRequest(user);
       setisAuthenticate(true);
-      setUser(res.data)
+      setUser(res.data);
       console.log(res);
-      console.log(res.token);
-      
-      const cookies= new CookiesUnivers()
-      cookies.set('token',res.data.token,{path:'/', secure:true, sameSite:'strict'}) 
+      console.log(res.data.token);
 
+      const cookies = new CookiesUnivers();
+      cookies.set("token", res.data.token, {
+        path: "/",
+        secure: true,
+        sameSite: "strict",
+      });
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
@@ -60,7 +63,6 @@ export const AuthProvaider = ({ children }) => {
       const res = await googleRequest();
 
       window.location.href = res.data["url"];
-
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +70,7 @@ export const AuthProvaider = ({ children }) => {
 
   const logout = (user) => {
     Cookie.remove("token");
-    Cookie.remove('googleToken')
+    Cookie.remove("googleToken");
     setisAuthenticate(false);
     setUser(null);
   };
@@ -76,7 +78,7 @@ export const AuthProvaider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const cookies = Cookie.get();
-          console.log(cookies,'dd');
+      console.log(cookies, "dd");
       if (cookies.googleToken) {
         if (!cookies.googleToken) {
           setisAuthenticate(false);
@@ -84,7 +86,6 @@ export const AuthProvaider = ({ children }) => {
           return setUser(null);
         }
         try {
-
           const res = await veryfyGoogleToken(cookies.googleToken);
 
           if (!res.data) {
@@ -96,24 +97,24 @@ export const AuthProvaider = ({ children }) => {
           setUser(res.data);
           setLoading(false);
         } catch (error) {
-
           setisAuthenticate(false);
           setUser(null);
           setLoading(false);
         }
       } else {
         if (!cookies.token) {
-          console.log(cookies.token);
-            console.log('s');
+          console.log(cookies.token,'token undefined');
+       
           setisAuthenticate(false);
+
           setLoading(false);
           return setUser(null);
         }
         try {
-          console.log('opop');
+          console.log("opop");
           const res = await veryfyTokenRequest(cookies.token);
           if (!res.data) {
-            console.log('kkjj');
+            console.log("kkjj");
             setisAuthenticate(false);
             setLoading(false);
             return;
@@ -124,7 +125,6 @@ export const AuthProvaider = ({ children }) => {
 
           setLoading(false);
         } catch (error) {
-
           setisAuthenticate(false);
           setUser(null);
           setLoading(false);
