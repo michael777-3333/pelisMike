@@ -49,6 +49,7 @@ export const AuthProvaider = ({ children }) => {
         secure: true,
         sameSite: "strict",
       });
+      // console.log(cookies.get("token"));
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
@@ -80,6 +81,7 @@ export const AuthProvaider = ({ children }) => {
       const cookies = Cookie.get();
       console.log(cookies, "dd");
       if (cookies.googleToken) {
+        console.log('ksks');
         if (!cookies.googleToken) {
           setisAuthenticate(false);
           setLoading(false);
@@ -111,8 +113,9 @@ export const AuthProvaider = ({ children }) => {
           return setUser(null);
         }
         try {
-          console.log("opop");
+          console.log(cookies);
           const res = await veryfyTokenRequest(cookies.token);
+          console.log(res);
           if (!res.data) {
             console.log("kkjj");
             setisAuthenticate(false);
