@@ -1,4 +1,4 @@
-import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { HashRouter, Route, RouterProvider } from "react-router-dom";
 import Layout from "../components/Layout";
 import Start from "../pages/Start";
 import Comedia from "../pages/Comedia";
@@ -15,7 +15,7 @@ import Action from "../pages/accion.jsx";
 import Fantasia from "../pages/fantasia.jsx";
 import Terror from "../pages/terror.jsx";
 
-const Routes = createBrowserRouter([
+const Routes = HashRouter([
   {
     path:"/",
     errorElement:<NotFoundPage/>,
