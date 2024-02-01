@@ -35,7 +35,7 @@ function SingIn() {
   }
 
   useEffect(() => {
-    if (isAuthenticate) {navigate("/start");}
+    if (isAuthenticate) navigate("/start");
     // allMovies()
   }, []);
 
