@@ -62,7 +62,7 @@ function Start() {
 
        
 
-          {movies && movies.slice(0,1).map((pelis) => (
+          {movies && movies.slice(0,10).map((pelis) => (
               <CardsStart key={pelis._id} img={pelis.img} goMovie={seeMovie} />
             ))}
         </Carousel>
