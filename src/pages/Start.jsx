@@ -69,9 +69,11 @@ function Start() {
 
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
+
           {movies &&
             movies&&
             movies.slice(11,20).map((pelis) => (
+              // <Lazyloading/>
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>
