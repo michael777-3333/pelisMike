@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Box, Button, CardActionArea, CardActions } from "@mui/material";
+import LazyLoad from 'react-lazy-load'
 function CardsStart(props) {
 
   function go() {
@@ -36,11 +37,15 @@ function CardsStart(props) {
       >
         <CardActionArea>
           <CardContent style={{ display: "flex", justifyContent: "center" }}>
-            <img
+
+          <LazyLoad height={400}>
+          <img
               src={props.img}
               style={{ width: "100%", height: "400px", borderRadius: "10px" }}
               alt=""
             />
+          </LazyLoad>
+            
           </CardContent>
         </CardActionArea>
         <CardActions style={{ justifyContent: "center" }}></CardActions>

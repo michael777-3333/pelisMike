@@ -194,7 +194,7 @@ console.log(movies);
           <ListItemButton>
             <Link
               style={{ textDecoration: "none", color: "white" }}
-              // to={`/start/profile/${user.id}`}
+              to={`/start/profile/${user.id}`}
             >
               <ListItemText
                 style={{
