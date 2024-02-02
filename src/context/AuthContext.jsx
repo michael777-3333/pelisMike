@@ -2,9 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   registerRequest,
   loginRequest,
-  veryfyTokenRequest,
+  verifyTokenRequest,
   googleRequest,
   veryfyGoogleToken,
+  googleRequestToken,
 } from "../api/auth";
 import { getMoviesRequest } from "../api/movies";
 import { set } from "react-hook-form";
@@ -25,6 +26,7 @@ export const AuthProvaider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const [tokenLocal, setTokenLocal]=useState()
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
@@ -43,14 +45,20 @@ export const AuthProvaider = ({ children }) => {
       console.log(res);
       console.log(res.data.token);
 
-      const cookies = new CookiesUnivers();
-      cookies.set("token", res.data.token, {
-        path: "/",
-        secure: true,
-        sameSite: "strict",
-        domain:'leafy-haupia-13a5b2.netlify.app'
-        // expires:3600000,
-      });
+      try {
+        window.localStorage.setItem("token", res.data.token);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // const cookies = new CookiesUnivers();
+      // cookies.set("token", res.data.token, {
+      //   path: "/",
+      //   secure: true,
+      //   sameSite: "strict",
+      //   domain:'leafy-haupia-13a5b2.netlify.app'
+      //   // expires:3600000,
+      // });
       // console.log(cookies.get("token"));
     } catch (error) {
       if (Array.isArray(error.response.data)) {
@@ -66,64 +74,69 @@ export const AuthProvaider = ({ children }) => {
       const res = await googleRequest();
 
       window.location.href = res.data["url"];
+
+      console.log(tokenGoogle);
+
+      // console.log(res);
+      // tokenGoogle()
     } catch (error) {
       console.log(error);
     }
   };
 
+  // const tokenGoogle = async ()=>{
+  //   try {
+  //     const res = await googleRequestToken()
+
+  //     const resTokev = await go
+  //     console.log(res,'sss');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  // }
+
   const logout = (user) => {
-    Cookie.remove("token");
-    Cookie.remove("googleToken");
+    window.localStorage.removeItem("token");
+    // Storage.removeItem('token')
+
     setisAuthenticate(false);
     setUser(null);
   };
 
   useEffect(() => {
     async function checkLogin() {
-      const cookies = Cookie.get();
-      console.log(cookies, "dd");
-      // if (cookies.googleToken) {
-      //   console.log('ksks');
-      //   if (!cookies.googleToken) {
-      //     setisAuthenticate(false);
-      //     setLoading(false);
-      //     return setUser(null);
-      //   }
-      //   try {
-      //     const res = await veryfyGoogleToken(cookies.googleToken);
+      const token = window.localStorage.getItem("token");
+      console.log(token);
+      // if (!googleToken) {
+      //   if (googleToken) {
+      //     try {
+      //       const res = await veryfyGoogleToken(googleToken);
 
-      //     if (!res.data) {
-      //       setisAuthenticate(false);
+      //       if (!res.data) {
+      //         setisAuthenticate(false);
+      //         setLoading(false);
+      //         return;
+      //       }
+      //       setisAuthenticate(true);
+      //       setUser(res.data);
       //       setLoading(false);
-      //       return;
+      //     } catch (error) {
+      //       setisAuthenticate(false);
+      //       setUser(null);
+      //       setLoading(false);
       //     }
-      //     setisAuthenticate(true);
-      //     setUser(res.data);
-      //     setLoading(false);
-      //   } catch (error) {
-      //     setisAuthenticate(false);
-      //     setUser(null);
-      //     setLoading(false);
+
       //   }
-      // }
-
-      // else {
-      // if (!cookies.token) {
-      //   console.log(cookies.token, 'jwjw');
-      //   console.log(cookies.token,'token undefined');
-
       //   setisAuthenticate(false);
-
       //   setLoading(false);
       //   return setUser(null);
-      // }
 
+      // } else {
       try {
-        console.log(cookies, "bxbx");
-
         // Verifica si cookies.token tiene un valor antes de hacer la solicitud
-        if (cookies.token) {
-          const res = await veryfyTokenRequest(cookies.token);
+        if (token) {
+          const res = await verifyTokenRequest(token);
           console.log(res);
           if (!res.data) {
             console.log("kkjj");
@@ -145,6 +158,7 @@ export const AuthProvaider = ({ children }) => {
         setisAuthenticate(false);
         setUser(null);
         setLoading(false);
+        // }
       }
     }
 
@@ -162,6 +176,7 @@ export const AuthProvaider = ({ children }) => {
         loading,
         logout,
         singinGoogle,
+
         // movies
       }}
     >
