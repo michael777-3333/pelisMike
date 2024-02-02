@@ -122,7 +122,7 @@ function Register() {
               </Button>
             </div>
 
-            <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'200px', color:"white", fontSize:'30px', marginTop:'200px' }}><p>Ya tengo cuenta: <Link to='/singIn'>LogIn </Link></p></div>
+            <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'200px', color:"white", fontSize:'30px', }}><p>Ya tengo cuenta: <Link to='/singIn'>LogIn </Link></p></div>
           </div>
           
         </form>

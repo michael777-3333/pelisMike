@@ -30,13 +30,16 @@ function CardsStart(props) {
         },
       }}>
       <Card
-      key={props.id}
+      // key={props._id}
         onClick={go}
         style={{ backgroundColor: "black" }}
         sx={{ maxWidth: 345 }}
       >
         <CardActionArea>
           <CardContent style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{display:'none'}}>{props.title}</div>
+          <div style={{display:'none'}}>{props.video}</div>
+          <div style={{display:'none'}}>{props._id}</div>
 
           <LazyLoad height={400}>
           <img

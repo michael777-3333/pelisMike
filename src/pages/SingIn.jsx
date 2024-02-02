@@ -46,7 +46,7 @@ function SingIn() {
           <h1 className="letrasHome">Pelis Mike</h1>
         </div>
       </Grid>
-      <Grid  justifyContent="center" item xs={12}>
+      <Grid container  justifyContent="center" item xs={12}>
         {errors.map((error, i) => (
           <div key={i} style={{ color: "white", backgroundColor: "red" }}>
             {error}
@@ -59,6 +59,7 @@ function SingIn() {
             alignItems: "center",
             display: "flex",
             justifyContent: "center",
+            maxWidth: "800px"
           }}
           className="ContenedorSingIn"
           onSubmit={onSubmit}
@@ -67,10 +68,11 @@ function SingIn() {
             <FormControl
               className="contenerdoInput"
               style={{
-                margin: "10px",
+                // margin: "10px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+              
               }}
             >
               <TextField
@@ -80,6 +82,7 @@ function SingIn() {
                 label="Email"
                 variant="outlined"
                 {...register("email", { required: true })}
+                style={{  maxWidth: "400px"}}
               />
             </FormControl>
 
@@ -90,6 +93,7 @@ function SingIn() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+               
               }}
             >
               <TextField
@@ -98,6 +102,7 @@ function SingIn() {
                 id="outlined-basic"
                 label="Password"
                 variant="outlined"
+                style={{  maxWidth: "400px"}}
                 {...register("password", { required: true })}
               />
             </FormControl>
@@ -124,10 +129,10 @@ function SingIn() {
             </div>
             
 
-            <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px', marginTop:'250px' }}><p>No tengo cuenta: <Link to='/register'>Register </Link></p></div>
+            <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px'}}><p>No tengo cuenta: <Link to='/register'>Register </Link></p></div>
           </div>
         </form>
-        <div
+        {/* <div
               style={{
                 margin: "10px",
                 display: "flex",
@@ -146,7 +151,7 @@ function SingIn() {
               >
                 Google
               </Button>
-            </div>
+            </div> */}
             
         
       </Grid>

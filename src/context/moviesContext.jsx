@@ -19,17 +19,29 @@ export const MoviesProvaider = ({ children }) => {
     const [movies,setMovies]= useState([])
     const [moviesByGenres, setMoviesByGenres]= useState([])
     const [comedy, setComedy] = useState()
+    // const [pelis2,setPelis]=useState([])
 
   const allMovies = async () => {
     try {
       const resMovie = await getMoviesRequest();
-
+      
       setMovies(resMovie.data)
      
     } catch (error) {
       console.log(error);
     }
   };
+
+ const getPelis = async (pelis)=>{
+  
+  window.sessionStorage.setItem('pelis',JSON.stringify(pelis.props))
+  console.log(window.sessionStorage.getItem('pelis'));
+
+ }
+
+ const clearSesion = async()=>{
+  window.sessionStorage.clear()
+ }
 
   const genresMovies = async (id)=>{
     try {
@@ -69,7 +81,7 @@ export const MoviesProvaider = ({ children }) => {
   return (
     <MoviesContext.Provider
       value={{
-        allMovies,movies,genresMovies,moviesByGenres
+        allMovies,movies,genresMovies,moviesByGenres,getPelis,clearSesion
       }}
     >
       {children}

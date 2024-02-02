@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { useUser } from "../context/userContext.jsx";
 import { useForm } from "react-hook-form";
 // import ima from '../../src/assets/img/fondo/deapool.jpg'
-import img from '../../public/17Otravez.jpg'
+import img from "../../public/17Otravez.jpg";
 // import {
 //   cardsStartArry,
 //   cardsComediaArry,
@@ -18,7 +18,7 @@ function Start() {
   const { name } = useUser();
   let stop = false;
   const navigate = useNavigate();
-  const { movies, allMovies } = useMovies();
+  const { movies, allMovies,getPelis,clearSesion } = useMovies();
 
   const responsive = {
     superLargeDesktop: {
@@ -39,8 +39,14 @@ function Start() {
     },
   };
 
+  useEffect(()=>{
+    clearSesion()
+  },[])
+
   function seeMovie(value) {
-    console.log("sss");
+    console.log(value);
+    getPelis(value)
+    navigate("/start/Movies");
   }
 
   return (
@@ -53,27 +59,34 @@ function Start() {
         padding: "0px",
         height: "100vh",
         width: "100%",
-        
       }}
     >
+
       <div style={{ height: "40px" }}></div>
       <Grid item xs={12} marginTop={6}>
         <Carousel partialVisible={true} responsive={responsive}>
-
-       
-
-          {movies && movies.slice(0,10).map((pelis) => (
-              <CardsStart key={pelis._id} img={pelis.img} goMovie={seeMovie} />
-            ))}
+          
+          {movies &&
+            movies
+              .slice(0, 10)
+              .map((pelis) => (
+                <CardsStart
+                  key={pelis._id}
+                  img={pelis.img}
+                  goMovie={seeMovie}
+                  video={pelis.video}
+                  title={pelis.title}
+                  id={pelis._id}
+                />
+              ))}
         </Carousel>
       </Grid>
 
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
-
           {movies &&
-            movies&&
-            movies.slice(11,20).map((pelis) => (
+            movies &&
+            movies.slice(11, 20).map((pelis) => (
               // <Lazyloading/>
               <CardsStart key={pelis._id} img={pelis.img} />
             ))}
@@ -82,29 +95,29 @@ function Start() {
       <Grid item xs={12}>
         <Carousel partialVisible={true} responsive={responsive}>
           {movies &&
-            movies&&
-            movies.slice(21,31).map((pelis) => (
-              <CardsStart key={pelis._id} img={pelis.img} />
-            ))}
+            movies &&
+            movies
+              .slice(21, 31)
+              .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
         </Carousel>
         <Grid item xs={12}>
-        <Carousel partialVisible={true} responsive={responsive}>
-          {movies &&
-            movies &&
-            movies.slice(31,40).map((pelis) => (
-              <CardsStart key={pelis._id} img={pelis.img} />
-            ))}
-        </Carousel>
-      </Grid>
-      <Grid item xs={12}>
-        <Carousel partialVisible={true} responsive={responsive}>
-          {movies &&
-            movies &&
-            movies.slice(41,47).map((pelis) => (
-              <CardsStart key={pelis._id} img={pelis.img} />
-            ))}
-        </Carousel>
-      </Grid>
+          <Carousel partialVisible={true} responsive={responsive}>
+            {movies &&
+              movies &&
+              movies
+                .slice(31, 40)
+                .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
+          </Carousel>
+        </Grid>
+        <Grid item xs={12}>
+          <Carousel partialVisible={true} responsive={responsive}>
+            {movies &&
+              movies &&
+              movies
+                .slice(41, 47)
+                .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
+          </Carousel>
+        </Grid>
       </Grid>
     </Grid>
   );
