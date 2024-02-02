@@ -6,7 +6,7 @@ import CardsStart from "../components/cardsStart.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useUser } from "../context/userContext.jsx";
 import { useForm } from "react-hook-form";
-import ima from '../../src/assets/img/fondo/deapool.jpg'
+// import ima from '../../src/assets/img/fondo/deapool.jpg'
 import img from '../../public/17Otravez.jpg'
 // import {
 //   cardsStartArry,
