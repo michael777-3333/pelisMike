@@ -37,7 +37,7 @@ function CardsStart(props) {
         <CardActionArea>
           <CardContent style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src={ require(props.img) }
+              src={ require(props.img).default }
               style={{ width: "100%", height: "400px", borderRadius: "10px" }}
               alt=""
             />
