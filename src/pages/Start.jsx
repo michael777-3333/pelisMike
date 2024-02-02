@@ -72,7 +72,7 @@ function Start() {
           {movies &&
             movies&&
             movies.slice(11,20).map((pelis) => (
-              <CardsStart key={pelis._id} img={`https://pelis-mike-e6rr.vercel.app/${pelis.img}`} />
+              <CardsStart key={pelis._id} img={pelis.img} />
             ))}
         </Carousel>
       </Grid>

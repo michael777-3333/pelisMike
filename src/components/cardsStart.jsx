@@ -37,7 +37,7 @@ function CardsStart(props) {
         <CardActionArea>
           <CardContent style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src={props.img }
+              src={`https://pelis-mike-e6rr.vercel.app${props.img}` }
               style={{ width: "100%", height: "400px", borderRadius: "10px" }}
               alt=""
             />
