@@ -19,18 +19,6 @@ function Start() {
   const navigate = useNavigate();
   const { movies, allMovies } = useMovies();
 
-
-
-
- 
-
-
-
-  // const limit1 = movies.slice(0,10)
-  // const limit2 = movies.slice(10,20)
-  // const limit3= movies.slice(20,31)
-
-
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
