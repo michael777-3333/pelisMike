@@ -19,7 +19,7 @@ export const UserProvaider = ({ children }) => {
     const[letPeli, setLetPeli]=useState()
 
   const getUser = async (id) => {
-    console.log('s');
+   
     try {
      
       const res = await getUserRequest(id);
@@ -36,7 +36,7 @@ export const UserProvaider = ({ children }) => {
       console.log(id);
       console.log(user);
       const res = await updateUserRequest(id, user);
-      console.log(res);
+
       window.sessionStorage.setItem('validate',res.data.movie)
       window.sessionStorage.setItem('name',res.data.username )
       // setName(res.data['username'])

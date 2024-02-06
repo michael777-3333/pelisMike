@@ -55,7 +55,7 @@ export const MoviesProvaider = ({ children }) => {
     console.log(value.props,'ooo');
     try {
       const res = await payMovieRequest(value.props)
-      console.log(res);
+   
       window.location.href=res.data.url
     } catch (error) {
       console.log(error);

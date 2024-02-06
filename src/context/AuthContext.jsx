@@ -64,15 +64,6 @@ export const AuthProvaider = ({ children }) => {
         console.log(error);
       }
 
-      // const cookies = new CookiesUnivers();
-      // cookies.set("token", res.data.token, {
-      //   path: "/",
-      //   secure: true,
-      //   sameSite: "strict",
-      //   domain:'leafy-haupia-13a5b2.netlify.app'
-      //   // expires:3600000,
-      // });
-      // console.log(cookies.get("token"));
     } catch (error) {
       setErrors(error.response.data)
       errores=true
@@ -92,7 +83,7 @@ export const AuthProvaider = ({ children }) => {
 
       window.location.href = res.data["url"];
 
-      console.log(tokenGoogle);
+ 
 
       // console.log(res);
       // tokenGoogle()
@@ -113,7 +104,7 @@ export const AuthProvaider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       const token = window.localStorage.getItem("token");
-      console.log(token);
+  
       // if (!googleToken) {
       //   if (googleToken) {
       //     try {
@@ -143,14 +134,14 @@ export const AuthProvaider = ({ children }) => {
         // Verifica si cookies.token tiene un valor antes de hacer la solicitud
         if (token) {
           const res = await verifyTokenRequest(token);
-          console.log(res);
+    
           if (!res.data) {
-            console.log("kkjj");
+        
             setisAuthenticate(false);
             setLoading(false);
             return;
           }
-          console.log(res.data);
+        
           setisAuthenticate(true);
           setUser(res.data);
           setLoading(false);

@@ -29,7 +29,7 @@ console.log(errors,'lll');
 
     if (errores==true) {
       if (errors.message) {
-        console.log('d');
+     
         Swal.fire(`${errors.message}`)
        errores=false
       }else if (errors) {

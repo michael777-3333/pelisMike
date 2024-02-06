@@ -40,7 +40,7 @@ function Fantasia() {
       let id = window.localStorage.getItem('id');
       if (id) {
           await getUser(id);
-          console.log(id);
+         
       } else {
           console.log("El 'id' no está definido en el localStorage");
       }
