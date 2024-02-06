@@ -43,7 +43,7 @@ function Nav() {
     useEffect(()=>{
       getUser(paramsHeader.id)
     },[])
-console.log(movies);
+
 
 
   function sendIdRenger() {}
