@@ -34,7 +34,7 @@ export const MoviesProvaider = ({ children }) => {
  const getPelis = async (pelis)=>{
   
   window.sessionStorage.setItem('pelis',JSON.stringify(pelis.props))
-  console.log(window.sessionStorage.getItem('pelis'));
+  
   // navigate("/start/Movies");
  }
 
