@@ -33,7 +33,7 @@ function Nav() {
     right: false,
   });
   const paramsHeader = useParams();
-
+  let username =window.sessionStorage.getItem('name')
 
   let action;
   let comedy;
@@ -287,7 +287,7 @@ console.log(movies);
                   fontSize: "25px",
                 }}
               >
-                Welcome: {name}
+                Welcome: {username}
               </h6>
             </div>
           </Button>

@@ -1,10 +1,22 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useMovies } from "../context/moviesContext.jsx";
 import ReactPlayer from 'react-player'
-
+import { useAuth } from "../context/AuthContext.jsx";
+import {useUser} from '../context/userContext.jsx'
+import { json } from "react-router-dom";
 function Movies() {
-  
+
+const {updateUser}=useUser()
+useEffect(()=>{
+  let payed = window.localStorage.getItem('id')
+  console.log(payed);
+  let data = {movie:true}
+  console.log(data);
+  updateUser(payed,data)
+
+},[])
+
   let peli= JSON.parse(window.sessionStorage.getItem('pelis')) 
  console.log(peli,'s');
   

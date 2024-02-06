@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getMoviesRequest,getGenreMovies } from "../api/movies";
+import { getMoviesRequest,getGenreMovies,payMovieRequest } from "../api/movies";
 import { set } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom"; //obtener un obejero con los datos que va en la URL (useParams)
-
 
 
 export const MoviesContext = createContext();
@@ -36,11 +35,11 @@ export const MoviesProvaider = ({ children }) => {
   
   window.sessionStorage.setItem('pelis',JSON.stringify(pelis.props))
   console.log(window.sessionStorage.getItem('pelis'));
-
+  // navigate("/start/Movies");
  }
 
  const clearSesion = async()=>{
-  window.sessionStorage.clear()
+  window.sessionStorage.removeItem('pelis')
  }
 
   const genresMovies = async (id)=>{
@@ -49,6 +48,17 @@ export const MoviesProvaider = ({ children }) => {
         setMoviesByGenres(genres)
     } catch (error) {
         
+    }
+  }
+
+  const payMovie = async (value)=>{
+    console.log(value.props,'ooo');
+    try {
+      const res = await payMovieRequest(value.props)
+      console.log(res);
+      window.location.href=res.data.url
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -81,7 +91,7 @@ export const MoviesProvaider = ({ children }) => {
   return (
     <MoviesContext.Provider
       value={{
-        allMovies,movies,genresMovies,moviesByGenres,getPelis,clearSesion
+        allMovies,movies,genresMovies,moviesByGenres,getPelis,clearSesion,payMovie
       }}
     >
       {children}

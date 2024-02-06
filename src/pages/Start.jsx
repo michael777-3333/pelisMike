@@ -1,25 +1,20 @@
 import { Grid } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardsStart from "../components/cardsStart.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
-import { useUser } from "../context/userContext.jsx";
-import { useForm } from "react-hook-form";
-// import ima from '../../src/assets/img/fondo/deapool.jpg'
-import img from "../../public/17Otravez.jpg";
-// import {
-//   cardsStartArry,
-//   cardsComediaArry,
-// } from "../components/cardsStartArray.js";
+import { updateUserRequest, getUserRequest } from "../api/user.js";
+
 import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/moviesContext.jsx";
+import Swal from 'sweetalert2'
+import {useUser} from '../context/userContext.jsx'
 function Start() {
-  const { name } = useUser();
-  let stop = false;
+  const { name,getUser,letPeli } = useUser();
   const navigate = useNavigate();
-  const { movies, allMovies,getPelis,clearSesion } = useMovies();
-
+  const { movies, allMovies,getPelis,clearSesion,payMovie } = useMovies();
+  const {errores,user}= useAuth()
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -41,12 +36,49 @@ function Start() {
 
   useEffect(()=>{
     clearSesion()
+    async function letId(){
+      let id = window.localStorage.getItem('id');
+      if (id) {
+          await getUser(id);
+      } else {
+          console.log("El 'id' no está definido en el localStorage");
+      }
+    }
+    letId()    
   },[])
-
   function seeMovie(value) {
-    console.log(value);
-    getPelis(value)
-    navigate("/start/Movies");
+    async function letId(){
+      let id = window.localStorage.getItem('id');
+      if (id) {
+          await getUser(id);
+          console.log(id);
+      } else {
+          console.log("El 'id' no está definido en el localStorage");
+      }
+    }
+    letId()
+
+    if (letPeli==false) {
+      Swal.fire({
+        title: "Suscribete para ver",
+        showCancelButton: true,
+        confirmButtonText: "Suscribirse",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          payMovie(value)
+          getPelis(value)
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+    }else{
+      getPelis(value)
+      navigate("/start/Movies");
+    }
+   
+   
+    // payMovie(value)
+    // navigate("/start/Movies");
   }
 
   return (
@@ -77,6 +109,9 @@ function Start() {
                   video={pelis.video}
                   title={pelis.title}
                   id={pelis._id}
+                  currency={pelis.currency}
+                  description={pelis.description}
+                  unit_amount={pelis.unit_amount}
                 />
               ))}
         </Carousel>
@@ -98,7 +133,15 @@ function Start() {
             movies &&
             movies
               .slice(21, 31)
-              .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
+              .map((pelis) => <CardsStart  key={pelis._id}
+              img={pelis.img}
+              goMovie={seeMovie}
+              video={pelis.video}
+              title={pelis.title}
+              id={pelis._id}
+              currency={pelis.currency}
+              description={pelis.description}
+              unit_amount={pelis.unit_amount} />)}
         </Carousel>
         <Grid item xs={12}>
           <Carousel partialVisible={true} responsive={responsive}>
@@ -106,7 +149,15 @@ function Start() {
               movies &&
               movies
                 .slice(31, 40)
-                .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
+                .map((pelis) => <CardsStart key={pelis._id}
+                img={pelis.img}
+                goMovie={seeMovie}
+                video={pelis.video}
+                title={pelis.title}
+                id={pelis._id}
+                currency={pelis.currency}
+                description={pelis.description}
+                unit_amount={pelis.unit_amount} />)}
           </Carousel>
         </Grid>
         <Grid item xs={12}>
@@ -115,7 +166,15 @@ function Start() {
               movies &&
               movies
                 .slice(41, 47)
-                .map((pelis) => <CardsStart key={pelis._id} img={pelis.img} />)}
+                .map((pelis) => <CardsStart key={pelis._id}
+                img={pelis.img}
+                goMovie={seeMovie}
+                video={pelis.video}
+                title={pelis.title}
+                id={pelis._id}
+                currency={pelis.currency}
+                description={pelis.description}
+                unit_amount={pelis.unit_amount} />)}
           </Carousel>
         </Grid>
       </Grid>

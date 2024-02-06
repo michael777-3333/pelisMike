@@ -40,7 +40,9 @@ function CardsStart(props) {
           <div style={{display:'none'}}>{props.title}</div>
           <div style={{display:'none'}}>{props.video}</div>
           <div style={{display:'none'}}>{props._id}</div>
-
+          <div style={{display:'none'}}>{props.description}</div>
+          <div style={{display:'none'}}>{props.currency}</div>
+          <div style={{display:'none'}}>{props.unit_amount}</div>
           <LazyLoad height={400}>
           <img
               src={props.img}

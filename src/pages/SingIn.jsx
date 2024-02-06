@@ -1,8 +1,6 @@
 import { Container, Grid } from "@mui/material";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormControl } from "@mui/material";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -12,22 +10,47 @@ import { useAuth } from "../context/AuthContext";
 import { useMovies } from "../context/moviesContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2'
+import VisibilityIcon from '@mui/icons-material/Visibility';
 function SingIn() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
   const { singin, errors, isAuthenticate,singinGoogle } = useAuth();
+  let {errores}= useAuth()
   // const {allMovies} =useMovies()
   const navigate = useNavigate();
   const {movies,allMovies } = useMovies();
   const onSubmit = handleSubmit((values) => {
     singin(values);
-    console.log('sssss');
-    // console.log(allMovies());
+    // console.log('sssss');
+    // console.log(allMovies())
 
   });
+console.log(errors,'lll');
+
+    if (errores==true) {
+      if (errors.message) {
+        console.log('d');
+        Swal.fire(`${errors.message}`)
+       errores=false
+      }else if (errors) {
+        Swal.fire(`${errors}`)
+        errores=false
+      
+      }
+    }else{
+      errores=false
+      
+    }
+   
+    // errors=false
+    // Swal.fire(`${errors.message}`)
+
+
+  console.log(errores);
 
   function moviesGo() {
     allMovies()
+    
   }
   function google(params) {
     singinGoogle()
@@ -47,13 +70,16 @@ function SingIn() {
         </div>
       </Grid>
       <Grid container  justifyContent="center" item xs={12}>
-        {errors.map((error, i) => (
+        {/* {errors.map((error, i) => (
           <div key={i} style={{ color: "white", backgroundColor: "red" }}>
             {error}
           </div>
-        ))}
+        ))} */}
         {/* reflejar los errores  */}
 
+        {/* {Swal.fire("SweetAlert2 is working!")} */}
+
+        {/* {errores?swal():null} */}
         <form
           style={{
             alignItems: "center",
@@ -98,11 +124,29 @@ function SingIn() {
             >
               <TextField
                 className="inputSingIn"
-                type="text"
-                id="outlined-basic"
+                type="password"
+                id="current-password"
                 label="Password"
                 variant="outlined"
                 style={{  maxWidth: "400px"}}
+                InputProps={{
+                  startAdornment: (
+                    
+                          <VisibilityIcon
+                          style={{marginRight:'20px',cursor:'pointer'}}
+                          onClick={()=>{
+                              const pass= document.getElementById('current-password')
+                      
+                              if (pass.type=='password') {
+                                pass.type='text'
+                              }else{
+                                pass.type='password'
+                              }
+                          }}
+                          />
+                   
+                  ),
+              }}
                 {...register("password", { required: true })}
               />
             </FormControl>

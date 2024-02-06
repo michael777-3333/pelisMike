@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/moviesContext";
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function Register() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
@@ -59,7 +59,7 @@ function Register() {
               <TextField
                 className="inputSingIn"
                 type="text"
-                id="outlined-basic"
+                id="outlined-basic1"
                 label="Username"
                 variant="outlined"
                 {...register("username", { required: true })}
@@ -77,7 +77,7 @@ function Register() {
               <TextField
                 className="inputSingIn"
                 type="text"
-                id="outlined-basic"
+                id="outlined-basic2"
                 label="Email"
                 variant="outlined"
                 {...register("email", { required: true })}
@@ -94,10 +94,30 @@ function Register() {
             >
               <TextField
                 className="inputSingIn"
-                type="text"
-                id="outlined-basic"
+                type="password"
+                id="current-password"
                 label="Password"
                 variant="outlined"
+               
+                InputProps={{
+                  startAdornment: (
+                    
+                          <VisibilityIcon
+                          style={{marginRight:'20px',cursor:'pointer'}}
+                          onClick={()=>{
+                              const pass= document.getElementById('current-password')
+                            
+                              if (pass.type=='password') {
+                                pass.type='text'
+                              }else{
+                                pass.type='password'
+                              }
+                          }}
+                          />
+                   
+                  ),
+              }}
+             
                 {...register("password", { required: true })}
               />
             </FormControl>

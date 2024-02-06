@@ -26,12 +26,23 @@ export const AuthProvaider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [username,setUsername]= useState()
+  let errores=false
   // const [tokenLocal, setTokenLocal]=useState()
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
       setUser(res.data);
       setisAuthenticate(true);
+      JSON.stringify(window.localStorage.setItem('id',res.data.id)) 
+      setUsername(window.sessionStorage.setItem('name',res.data.username ))
+      try {
+        window.localStorage.setItem("token", res.data.token);
+       
+      } catch (error) {
+        console.log(error);
+      }
+
     } catch (error) {
       setErrors(error.response.data);
     }
@@ -42,8 +53,10 @@ export const AuthProvaider = ({ children }) => {
       const res = await loginRequest(user);
       setisAuthenticate(true);
       setUser(res.data);
-      console.log(res);
-      console.log(res.data.token);
+
+      JSON.stringify(window.localStorage.setItem('id',res.data.id)) 
+      setUsername(window.sessionStorage.setItem('name',res.data.username ))
+
 
       try {
         window.localStorage.setItem("token", res.data.token);
@@ -61,11 +74,15 @@ export const AuthProvaider = ({ children }) => {
       // });
       // console.log(cookies.get("token"));
     } catch (error) {
+      setErrors(error.response.data)
+      errores=true
+      
       if (Array.isArray(error.response.data)) {
         console.log(error.response.data);
-        return setErrors[error.response.data];
+        // setErrores(error.response.data)
+         
       }
-      setErrors([error.response.data.message]);
+      // setErrors([error.response.data.message]);
     }
   };
 
@@ -84,20 +101,9 @@ export const AuthProvaider = ({ children }) => {
     }
   };
 
-  // const tokenGoogle = async ()=>{
-  //   try {
-  //     const res = await googleRequestToken()
-
-  //     const resTokev = await go
-  //     console.log(res,'sss');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  // }
-
   const logout = (user) => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem('id')
     // Storage.removeItem('token')
 
     setisAuthenticate(false);
@@ -176,8 +182,8 @@ export const AuthProvaider = ({ children }) => {
         loading,
         logout,
         singinGoogle,
-
-        // movies
+        errores,username,
+        setUsername   
       }}
     >
       {children}

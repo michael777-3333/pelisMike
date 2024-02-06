@@ -26,6 +26,7 @@
     "react-player": "^2.14.1",
     "react-router-dom": "^6.21.2",
     "styled-components": "^6.1.8",
+    "sweetalert2": "^11.10.4",
     "universal-cookie": "^7.0.2"
   },
   "devDependencies": {
