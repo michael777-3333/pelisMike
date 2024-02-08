@@ -21,18 +21,9 @@ function SingIn() {
   const {movies,allMovies } = useMovies();
   const onSubmit = handleSubmit((values) => {
     singin(values);
-    // console.log('sssss');
-    // console.log(allMovies())
 
   });
 console.log(errors,'lll');
-
-  
-    // errors=false
-    // Swal.fire(`${errors.message}`)
-
-
-
 
   function moviesGo() {
     allMovies()
@@ -49,7 +40,7 @@ console.log(errors,'lll');
   }, [isAuthenticate]);
 
   return (
-    <Grid container className="fondoSingIn" spacing={1}>
+    <Grid style={{height:'100vh'}} container className="fondoSingIn" spacing={1}>
       <Grid item xs={12}>
         <div className="ContenedorLetrasHome">
           <h1 className="letrasHome">Pelis Mike</h1>

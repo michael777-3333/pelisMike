@@ -31,7 +31,7 @@ function Register() {
   }
 
   return (
-    <Grid container className="fondoSingIn" spacing={1}>
+    <Grid container style={{height:'100vh'}} className="fondoSingIn" spacing={1}>
       <Grid item md={12} justifyContent="flex-start">
         <div className="ContenedorLetrasHome">
           <h1 className="letrasHome">Pelis Mike</h1>
