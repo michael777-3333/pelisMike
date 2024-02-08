@@ -16,7 +16,7 @@ export default function SimpleSlider() {
    useEffect(() => {
     const interval = setInterval(() => {
       const count = Math.floor(Math.random() * 4);
-      const imageUrl = `../../public/ramdon/${count}.jpeg`;
+      const imageUrl = `/ramdon/${count}.jpeg`;
   
       setImage(imageUrl);
   
