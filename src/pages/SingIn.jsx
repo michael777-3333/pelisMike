@@ -27,26 +27,12 @@ function SingIn() {
   });
 console.log(errors,'lll');
 
-    if (errores==true) {
-      if (errors.message) {
-     
-        Swal.fire(`${errors.message}`)
-       errores=false
-      }else if (errors) {
-        Swal.fire(`${errors}`)
-        errores=false
-      
-      }
-    }else{
-      errores=false
-      
-    }
-   
+  
     // errors=false
     // Swal.fire(`${errors.message}`)
 
 
-  console.log(errores);
+
 
   function moviesGo() {
     allMovies()
@@ -70,16 +56,14 @@ console.log(errors,'lll');
         </div>
       </Grid>
       <Grid container  justifyContent="center" item xs={12}>
-        {/* {errors.map((error, i) => (
-          <div key={i} style={{ color: "white", backgroundColor: "red" }}>
-            {error}
-          </div>
-        ))} */}
-        {/* reflejar los errores  */}
-
-        {/* {Swal.fire("SweetAlert2 is working!")} */}
-
-        {/* {errores?swal():null} */}
+      {errors.map((error, i) => (
+            <div className="error-message animate__animated animate__bounce" key={i} style={{ color: "white", backgroundColor: "red",height:'50px'}}>
+  
+             <p>{error}</p> 
+            </div>
+          ))}
+       
+      
         <form
           style={{
             alignItems: "center",
@@ -174,6 +158,8 @@ console.log(errors,'lll');
             
 
             <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px'}}><p>No tengo cuenta: <Link to='/register'>Register </Link></p></div>
+            <div style={{backgroundColor:'#000', borderRadius:'10px' ,width:'250px', color:"white", fontSize:'30px'}}><p>Forgot my password: <Link to='/forget-password'>Go </Link></p></div>
+
           </div>
         </form>
         {/* <div

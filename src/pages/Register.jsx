@@ -11,12 +11,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMovies } from "../context/moviesContext";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import 'animate.css';
 
 function Register() {
   const { register, handleSubmit } = useForm(); //me ahorra el useState()
   const { signup, isAuthenticate, errors } = useAuth();
   const {movies,allMovies } = useMovies();
 
+  console.log(errors);
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticate) navigate("/start");
@@ -37,11 +39,15 @@ function Register() {
       </Grid>
 
       <Grid container justifyContent="center">
-        {errors.map((error, i) => (
-          <div key={i} style={{ color: "white", backgroundColor: "red" }}>
-            {error}
-          </div>
-        ))}
+
+ 
+           {errors.map((error, i) => (
+            <div className="error-message animate__animated animate__bounce" key={i} style={{ color: "white", backgroundColor: "red",height:'50px'}}>
+  
+             <p>{error}</p> 
+            </div>
+          ))}
+       
         <form
           style={{ display: "flex", justifyContent: "center" }}
           className="ContenedorSingIn"

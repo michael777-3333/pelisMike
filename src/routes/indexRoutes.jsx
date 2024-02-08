@@ -18,6 +18,8 @@ import Action from "../pages/accion.jsx";
 import Fantasia from "../pages/fantasia.jsx";
 import Terror from "../pages/terror.jsx";
 import { MoviesProvaider } from "../context/moviesContext";
+import ForgetPassword from "../pages/forgetPassword.jsx";
+import ResetPassword from "../pages/ResetPassword.jsx";
 
 const AppRoutes = () => {
   return (
@@ -28,8 +30,11 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
         <Route path="/SingIn" element={<SingIn />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/restPassword/:id/:token" element={<ResetPassword/>}></Route>
+        <Route path="/Forget-password" element={<ForgetPassword/>}></Route>
         <Route path="/Start" element={<Layout />}>
-
+          
+       
           <Route index element={<Start />} />
           <Route path="Drama/:id" element={<Drama />} />
           <Route path="Comedia/:id" element={<Comedia />} />

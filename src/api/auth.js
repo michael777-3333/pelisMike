@@ -25,5 +25,9 @@ export const googleRequest=()=> axios.post(`/auth/google`)
 
 export const googleRequestToken=()=> axios.get(`/auth/google`,googleRequest)
 
-export const veryfyGoogleToken=()=> axios.get(`verifyGoogle`,veryfyGoogleToken)
+export const veryfyGoogleToken=()=> axios.get(`/verifyGoogle`,veryfyGoogleToken)
+
+export const forgetPasswordrequest=(user)=> axios.post(`/forget-password`,user)
+
+export const resetPassword =(id,token,password)=>axios.post(`/resetPassword/${id}/${token}`,password)
 

@@ -46,7 +46,7 @@ function CardsStart(props) {
           <LazyLoad height={400}>
           <img
               src={props.img}
-              style={{ width: "100%", height: "400px", borderRadius: "10px" }}
+              style={{ width: "100%", height: "380px", borderRadius: "10px",objectFit: "cover" }}
               alt=""
             />
           </LazyLoad>

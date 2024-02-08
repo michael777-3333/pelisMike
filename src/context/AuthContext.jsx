@@ -6,6 +6,8 @@ import {
   googleRequest,
   veryfyGoogleToken,
   googleRequestToken,
+  forgetPasswordrequest
+  ,resetPassword
 } from "../api/auth";
 import { getMoviesRequest } from "../api/movies";
 import { set } from "react-hook-form";
@@ -27,8 +29,8 @@ export const AuthProvaider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [username,setUsername]= useState()
-  let errores=false
-  // const [tokenLocal, setTokenLocal]=useState()
+  const [messagePassword, setMessagePassword]= useState([])
+
   const signup = async (user) => {
     try {
       const res = await registerRequest(user);
@@ -65,28 +67,52 @@ export const AuthProvaider = ({ children }) => {
       }
 
     } catch (error) {
-      setErrors(error.response.data)
-      errores=true
-      
-      if (Array.isArray(error.response.data)) {
-        console.log(error.response.data);
-        // setErrores(error.response.data)
-         
-      }
-      // setErrors([error.response.data.message]);
+      console.log(error);
+        setErrors(error.response.data)
     }
   };
+
+  const forgetPassword= async(user)=>{
+    console.log(user);
+    try {
+      const res = await forgetPasswordrequest(user)
+    
+      window.location.href= res.data.link
+    } catch (error) {
+      console.log(error);
+      // console.log(error.responde.data); 
+      setErrors(error.response.data)
+    }
+  }
+
+  const resetPaswordToken= async(id,token,password)=>{
+    console.log(id,token,password);
+    try {
+      const res = await resetPassword(id,token,password)
+
+      console.log(res.data);
+      setMessagePassword(res.data)
+    } catch (error) {
+      setErrors(error.response.data)
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    if (errors.length>0 || messagePassword.length>0) {
+      setTimeout(()=>{
+        setErrors([])
+        setMessagePassword([])
+      },5000)
+    }
+  },[errors,messagePassword])
+
 
   const singinGoogle = async () => {
     try {
       const res = await googleRequest();
-
       window.location.href = res.data["url"];
-
- 
-
-      // console.log(res);
-      // tokenGoogle()
+      
     } catch (error) {
       console.log(error);
     }
@@ -173,8 +199,12 @@ export const AuthProvaider = ({ children }) => {
         loading,
         logout,
         singinGoogle,
-        errores,username,
-        setUsername   
+        username,
+        setUsername   ,
+        forgetPassword,
+        resetPaswordToken,
+        messagePassword,
+      
       }}
     >
       {children}
